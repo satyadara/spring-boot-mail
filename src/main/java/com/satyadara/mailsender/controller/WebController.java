@@ -17,8 +17,16 @@ public class WebController {
     @Qualifier("simpleMail")
     private final MailService simpleMail;
 
-    @PostMapping(value = "/simple-mail",consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Qualifier("mimeMail")
+    private final MailService mimeMail;
+
+    @PostMapping(value = "/simple-mail", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void sendSimpleMail(@RequestBody Mail mail) {
         simpleMail.send(mail);
+    }
+
+    @PostMapping(value = "/mime-mail", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void sendMimeMail(@RequestBody Mail mail) {
+        mimeMail.send(mail);
     }
 }
